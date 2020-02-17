@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import '../service/service_method.dart';
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,11 +28,14 @@ class _HomePageState extends State<HomePage> {
               List<Map> navigatorList = (data['data']['category'] as List).cast();
               String adPicture =
               data['data']['advertesPicture']['PICTURE_ADDRESS'];
+              String leaderImage = data['data']['shopInfo']['leaderImage'];
+              String leaderPhone = data['data']['shopInfo']['leaderPhone'];
               return Column(
                 children: <Widget>[
                   SwiperDiy(swiperDateList: swiper),
                   TopNavigator(navigatorList: navigatorList),
-                  AdBanner(adPicture: adPicture)
+                  AdBanner(adPicture: adPicture),
+                  LeaderPhone(leaderImage: leaderImage,leaderPhone: leaderPhone)
                 ],
               );
             }else{
@@ -124,6 +128,33 @@ class AdBanner  extends StatelessWidget {
     );
   }
 }
+//店长电话模块
+class LeaderPhone extends StatelessWidget {
+  final String leaderImage; // 店长图片
+  final String leaderPhone;// 店长电话
+
+  const LeaderPhone({Key key, this.leaderImage, this.leaderPhone}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: InkWell(
+        onTap: _launchUrl,
+        child: Image.network(leaderImage),
+      ),
+    );
+  }
+
+  void _launchUrl() async {
+    String url = 'tel:' + leaderPhone;
+    print(url);
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'url不能进行访问，异常';
+    }
+  }
+}
+
 
 
 
