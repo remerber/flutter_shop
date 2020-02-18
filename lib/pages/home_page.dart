@@ -9,11 +9,10 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+class _HomePageState extends State<HomePage>  {
 
 
-  @override
-  bool get wantKeepAlive => true;
+
 
   String homePageContent = '正在获取数据';
   @override
