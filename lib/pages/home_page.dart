@@ -11,20 +11,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>  {
 
-
-
-
   String homePageContent = '正在获取数据';
   @override
 
   @override
   Widget build(BuildContext context) {
+    var formData = {'lon': '115.02932', 'lat': '35.76189'};
     return Scaffold(
       appBar: AppBar(
         title: Text('百姓生活+'),
       ),
       body: FutureBuilder(
-          future: getHomePageContent(),
+          future: request('homePageContent', formData),
           builder: (context,snapshot){
             if(snapshot.hasData){
               var data=json.decode(snapshot.data.toString());
@@ -62,6 +60,7 @@ class _HomePageState extends State<HomePage>  {
                     FloorContent(
                       floorGoodsList: floor3,
                     ),
+                    HotGoods()
                   ],
                 ),
               );
@@ -274,7 +273,6 @@ class FloorTitle extends StatelessWidget {
     );
   }
 }
-
 // 楼层商品列表
 class FloorContent extends StatelessWidget {
   final List floorGoodsList;
@@ -323,6 +321,30 @@ class FloorContent extends StatelessWidget {
     );
   }
 }
+
+//火爆专区
+class HotGoods  extends StatefulWidget {
+  @override
+  _HotGoodsState createState() => _HotGoodsState();
+}
+
+class _HotGoodsState extends State<HotGoods > {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    request('homePageBelowConten', 1).then((val) {
+      print(val);
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+child: Text('11111'),
+    );
+  }
+}
+
 
 
 
