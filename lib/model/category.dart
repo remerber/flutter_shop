@@ -1,20 +1,25 @@
-class CategoryBigListModel {
+class CategoryModel {
+  String code;
+  String message;
+  List<Data> data;
 
-  List<CategoryBigModel> data;
+  CategoryModel({this.code, this.message, this.data});
 
-  CategoryBigListModel({ this.data});
-
-  CategoryBigListModel.fromJson(Map<String, dynamic> json) {
+  CategoryModel.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    message = json['message'];
     if (json['data'] != null) {
-      data = new List<CategoryBigModel>();
+      data = new List<Data>();
       json['data'].forEach((v) {
-        data.add(new CategoryBigModel.fromJson(v));
+        data.add(new Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['code'] = this.code;
+    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data.map((v) => v.toJson()).toList();
     }
@@ -22,21 +27,21 @@ class CategoryBigListModel {
   }
 }
 
-class CategoryBigModel {
+class Data {
   String mallCategoryId;
   String mallCategoryName;
   List<BxMallSubDto> bxMallSubDto;
   Null comments;
   String image;
 
-  CategoryBigModel(
+  Data(
       {this.mallCategoryId,
         this.mallCategoryName,
         this.bxMallSubDto,
         this.comments,
         this.image});
 
-  CategoryBigModel.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     mallCategoryId = json['mallCategoryId'];
     mallCategoryName = json['mallCategoryName'];
     if (json['bxMallSubDto'] != null) {
