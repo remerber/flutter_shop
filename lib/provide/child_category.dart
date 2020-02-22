@@ -4,7 +4,7 @@ class ChildCategory   with ChangeNotifier{
   List<BxMallSubDto>  childCategoryList=[];
   int childIndex = 0; // 子类高亮索引
   String categoryId = '4'; // 大类ID
-
+  String subId = ''; // 小类
   getChildCategory(List<BxMallSubDto> list,String id) {
     categoryId=id;
     childIndex=0;
@@ -18,8 +18,9 @@ class ChildCategory   with ChangeNotifier{
     notifyListeners();
   }
   //改变子类索引
-  changeChildIndex(index) {
+  changeChildIndex(index,String id) {
     childIndex = index;
+    subId=id;
     notifyListeners();
   }
 }
