@@ -6,9 +6,14 @@ class DetailsPage extends StatelessWidget {
   const DetailsPage({Key key, this.goodsId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Center(
-        child: Text('商品ID：${goodsId}'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('详情'),
+      ),
+      body: Container(
+        child:Center(
+          child: Text('商品ID：${goodsId}'),
+        ),
       ),
     );
   }
