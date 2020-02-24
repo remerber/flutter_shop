@@ -6,6 +6,8 @@ import 'dart:convert';
 class DetailsInfoProvide  with ChangeNotifier {
 
   DetailsModel goodsInfo = null;
+  bool isLeft=true;
+  bool isRight=false;
 
   //后台获取商品数据
   getGoodsInfo(String id) {
@@ -17,4 +19,16 @@ class DetailsInfoProvide  with ChangeNotifier {
       notifyListeners();
     });
   }
+  //tabbar的切换方法
+  changeLeftAndRight(String changeState) {
+    if (changeState == 'left') {
+      isLeft = true;
+      isRight = false;
+    } else {
+      isLeft = false;
+      isRight = true;
+    }
+    notifyListeners();
+  }
+
 }
