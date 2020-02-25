@@ -37,8 +37,8 @@ class DetailsBottom extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-        await Provide.value<CartProvide>(context)
-            .remove();
+              await Provide.value<CartProvide>(context)
+                  .save(goodsId, goodsName, count, price, images);
             },
             child: Container(
               alignment: Alignment.center,
@@ -55,7 +55,10 @@ class DetailsBottom extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () async {
+              await Provide.value<CartProvide>(context)
+                  .remove();
+            },
             child: Container(
               alignment: Alignment.center,
               width: ScreenUtil().setWidth(320),
