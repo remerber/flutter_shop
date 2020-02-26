@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop/provide/cart.dart';
+import 'package:provide/provide.dart';
 class CartBottom  extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5.0),
       color: Colors.white,
-      child: Row(
+      child:
+      Provide<CartProvide>(
+       builder: (context,child,val){
+         return   Row(
         children: <Widget>[
-        selectAllBtn(),
-          allPriceArea(),
-        goButton()
+         selectAllBtn(context),
+          allPriceArea(context),
+         goButton(context)
         ],
-      ),
+      );
+       }
+      )
     );
   }
-  Widget selectAllBtn() {
+  Widget selectAllBtn(context) {
     return Container(
       child: Row(
         children: <Widget>[
@@ -29,7 +36,8 @@ class CartBottom  extends StatelessWidget {
       ),
     );
   }
-  Widget allPriceArea(){
+  Widget allPriceArea(context){
+    double allPrice = Provide.value<CartProvide>(context).allPrice;
     return Container(
       width: ScreenUtil().setWidth(430),
       child: Column(
@@ -51,7 +59,7 @@ class CartBottom  extends StatelessWidget {
                   width: ScreenUtil().setWidth(150),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    '¥ 1992',
+                    '¥$allPrice',
                     style: TextStyle(
                       fontSize: ScreenUtil().setSp(36),
                       color: Colors.red,
@@ -76,7 +84,8 @@ class CartBottom  extends StatelessWidget {
       ),
     );
   }
-  Widget goButton(){
+  Widget goButton(context){
+    int allGoodsCount = Provide.value<CartProvide>(context).allGoodsCount;
     return Container(
       width: ScreenUtil().setWidth(160),
 
@@ -90,7 +99,7 @@ class CartBottom  extends StatelessWidget {
               borderRadius: BorderRadius.circular(3.0)
           ),
           child: Text(
-            '结算(6)',
+            '结算($allGoodsCount)',
             style: TextStyle(color: Colors.white),
           ),
         ),
